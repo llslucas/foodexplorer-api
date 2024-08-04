@@ -8,8 +8,21 @@ export class SessionsController{
         const userRepository = new UserRepository();
         const sessionCreateService = new SessionCreateService(userRepository);
 
-        const sessionData = await sessionCreateService.execute({email, password});
+        const { user, token } = await sessionCreateService.execute({email, password});
 
-        return response.json(sessionData);
+        response.cookie("token", token, {
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+            maxAge: 15 * 60 * 1000
+        });
+    
+        const responseUser = {
+            name: user.name,
+            email: user.email,
+            role: user.role
+        };
+    
+        return response.status(201).json({ user: responseUser });        
     }
 }

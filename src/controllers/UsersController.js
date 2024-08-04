@@ -1,6 +1,7 @@
 import UserRepository from '../repositories/UserRepository.js';
 import UserCreateService from '../services/UserCreateService.js';
 import UserUpdateService from '../services/UserUpdateService.js';
+import AppError from '../utils/AppError.js';
 
 export default class UsersController {
     async create(request, response){
@@ -24,5 +25,19 @@ export default class UsersController {
         userUpdateService.execute({ user_id, name, email, password, old_password })
 
         return response.json("Usuário atualizado com sucesso!");
+    }
+
+    async validate(request, response){
+        const id = request.user.id;
+
+        const userRepository = new UserRepository();
+
+        const checkUserExists = await userRepository.findById(id);
+
+        if(!checkUserExists){
+            throw new AppError("JWT token não informado", 401);
+        }
+
+        return response.status(200).json(true);
     }
 }
