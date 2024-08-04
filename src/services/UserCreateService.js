@@ -8,6 +8,9 @@ export default class UserCreateService{
   }
 
   async execute({name, email, password}){  
+    if(!name || !email || !password)
+      throw new AppError("Pelo menos um dos valores passados estão em branco.");     
+
     const checkUserExists = await this.repository.findByEmail(email);       
 
     if(checkUserExists)
