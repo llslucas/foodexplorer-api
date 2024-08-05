@@ -20,7 +20,7 @@ export class SessionsController{
         const responseUser = {
             name: user.name,
             email: user.email,
-            role: user.role
+            isAdmin: user.role === "admin"
         };
     
         return response.status(201).json({ user: responseUser });        
