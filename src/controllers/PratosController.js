@@ -4,6 +4,7 @@ import PratoCreateService from '../services/PratoCreateService.js';
 import PratoUpdateService from '../services/PratoUpdateService.js';
 import PratoDeleteService from '../services/PratoDeleteService.js';
 import PratoSearchService from '../services/PratoSearchService.js';
+import PratoGetCategoriesService from '../services/PratoGetCategoriesService.js';
 
 import FavoritesRepository from '../repositories/FavoritesRepository.js';
 import FavoritesListService from '../services/FavoritesListService.js';
@@ -63,9 +64,18 @@ export default class PratosController{
         ...prato,
         isFavorite: favoritos.includes(prato.id)
       }
-    })
+    })   
 
     return response.json(pratosWithFavorites);
+  }
+
+  async getCategories(request, response){
+    const repository = new PratosRepository();
+    const getCategoriesService = new PratoGetCategoriesService(repository);
+
+    const categories = await getCategoriesService.execute();
+
+    return response.status(200).json(categories);
   }
 
   async get(request, response){

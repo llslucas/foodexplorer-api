@@ -100,17 +100,25 @@ export default class PratosRepository{
    * @param {{name: String, ingredient: String}} name
    * @returns {promise<[]>} pratos
    */
-  async search({searchParameter}){
+  async search({ searchParameter }){
     const pratos = await knex("pratos")
       .select(["pratos.id", "pratos.name", "pratos.description", "pratos.price", "pratos.img", "pratos.category"])
       .whereLike("pratos.name", `%${searchParameter}%`)
-      .orWhereLike("ingredientes.name", `%${searchParameter}%`)
+      .orWhereLike("ingredientes.name", `%${searchParameter}%`)      
       .innerJoin("ingredientes", "ingredientes.prato_id", "pratos.id")      
       .groupBy("pratos.id")
-      .orderBy("pratos.name")
+      .orderBy(["pratos.category", "pratos.name"])
       
     return pratos;
   }    
+
+  async getCategories(){
+    const categories = await knex("pratos")
+      .select(["pratos.category"])
+      .groupBy("pratos.category");
+
+    return categories;
+  }
 
   /**
    * 

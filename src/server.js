@@ -5,12 +5,17 @@ import express from 'express';
 import routes from './routes/index.js';
 import { UPLOADS_FOLDER } from './configs/upload.js';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 app.use("/files", express.static(UPLOADS_FOLDER));
+app.use(cookieParser());
+app.use(cors({
+  origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+  credentials: true
+}));
 app.use(routes);
 
 app.use((error, request, response, next) => {

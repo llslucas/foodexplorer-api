@@ -12,6 +12,7 @@ pratosRouter.post('/', verifyUserAuthorization("admin"),  pratosController.creat
 pratosRouter.patch('/:id', verifyUserAuthorization("admin"), pratosController.update);
 pratosRouter.delete('/:id', verifyUserAuthorization("admin"), pratosController.delete);
 pratosRouter.get('/', pratosController.index);
+pratosRouter.get('/categories', pratosController.getCategories);
 pratosRouter.get('/:id', pratosController.get);
 
 export default pratosRouter;
