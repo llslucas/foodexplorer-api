@@ -8,7 +8,7 @@ export default class PratosRepository{
 
   /**
    * 
-   * @param {{name: String, description: String, category:String, price: number, img: String, ingredientes: String[]}} new_prato 
+   * @param {{name: String, description: String, category:String, price: number, ingredientes: String[]}} new_prato 
    * @returns {Promise<number>} prato_id
    */
   async create({ name, description, category, price, ingredientes }){
@@ -26,7 +26,7 @@ export default class PratosRepository{
 
   /**
    * 
-   * @param {Prato} new_prato 
+   * @param {{id:number, name: String, description: String, category:String, price: number, ingredientes: String[]}} new_prato 
    * @returns {Promise<number>} updated_itens
    */
   async update({id, name, description, category, price, ingredientes}){
@@ -34,7 +34,7 @@ export default class PratosRepository{
       name,
       description,
       category,
-      price      
+      price
     }).where({id});
 
     if(ingredientes){      
@@ -45,6 +45,18 @@ export default class PratosRepository{
     return updated_itens;
   };
 
+  /**
+   * 
+   * @param {{id:number, img: String}} new_prato 
+   * @returns {Promise<number>} updated_itens
+   */
+  async updateImg({id, img}){
+    const updated_itens = await knex("pratos").update({
+      img,
+    }).where({id}); 
+
+    return updated_itens;
+  }
 
   /**
    * 

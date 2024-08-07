@@ -23,4 +23,13 @@ export default class DiskStorage{
 
         await fs.promises.unlink(filePath);
     }
+
+    async unsaveFile(file){
+        await fs.promises.rename(
+            path.resolve(UPLOADS_FOLDER, file),
+            path.resolve(TMP_FOLDER, file)
+        );
+
+        return file;
+    }
 }

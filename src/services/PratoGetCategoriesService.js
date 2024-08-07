@@ -7,10 +7,8 @@ export default class PratoGetCategoriesService{
   }
 
   async execute(){
-    const categories = await this.repository.getCategories();
+    const categories = await this.repository.getCategories();    
 
-    const categoriesArray = categories.map(c => c.category);
-
-    return categoriesArray;
+    return categories;
   }
 }

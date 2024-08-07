@@ -48,7 +48,7 @@ describe("PratoGetCategoriesService", () => {
   it("The search should return all categories in a Array", async () => {
     const categories = await service.execute();
 
-    expect(categories).toStrictEqual(["Categoria 1", "Categoria 2"])
+    expect(categories).toEqual([{category: "Categoria 1"}, {category: "Categoria 2"}])
   });
 
 });

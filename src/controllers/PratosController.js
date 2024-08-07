@@ -5,6 +5,7 @@ import PratoUpdateService from '../services/PratoUpdateService.js';
 import PratoDeleteService from '../services/PratoDeleteService.js';
 import PratoSearchService from '../services/PratoSearchService.js';
 import PratoGetCategoriesService from '../services/PratoGetCategoriesService.js';
+import PratoSetImageService from '../services/PratoSetImageService.js';
 
 import FavoritesRepository from '../repositories/FavoritesRepository.js';
 import FavoritesListService from '../services/FavoritesListService.js';
@@ -31,6 +32,21 @@ export default class PratosController{
     await pratoUpdateService.execute({id, name, description, category, price, ingredientes});
 
     return response.json("Prato atualizado com sucesso!");
+  }
+
+  async updateImg(request, response){
+    const { id } = request.params;    
+
+    const fileName = request.file.filename;
+
+    const repository = new PratosRepository();
+    const service = new PratoSetImageService(repository);
+
+    console.log({prato_id: id, pratoFileName: fileName});
+
+    await service.execute({prato_id: id, pratoFileName: fileName});
+
+    return response.status(200).json();
   }
 
   async delete(request, response){

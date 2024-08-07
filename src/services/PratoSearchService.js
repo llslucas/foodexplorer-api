@@ -6,7 +6,7 @@ export default class PratoSearchService{
     this.repository = pratosRepository;
   }
 
-  async execute({searchParameter, user_id}){
+  async execute({ searchParameter }){
     const pratos = await this.repository.search({searchParameter});    
 
     return pratos;        
