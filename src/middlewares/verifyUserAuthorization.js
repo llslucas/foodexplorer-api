@@ -9,8 +9,6 @@ export default function verifyUserAuthorization(rolesToVerify){
   return (request, response, next) => {
     const { role } =  request.user;
 
-    console.log(request.user);
-
     if(!rolesToVerify.includes(role)){
       throw new AppError("Unauthorized", 401);
     }

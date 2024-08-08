@@ -42,8 +42,6 @@ export default class PratosController{
     const repository = new PratosRepository();
     const service = new PratoSetImageService(repository);
 
-    console.log({prato_id: id, pratoFileName: fileName});
-
     await service.execute({prato_id: id, pratoFileName: fileName});
 
     return response.status(200).json();
