@@ -13,7 +13,7 @@ app.use(express.json());
 app.use("/files", express.static(UPLOADS_FOLDER));
 app.use(cookieParser());
 app.use(cors({     
-    origin: ["*"],
+    origin: "*",
     credentials: true
 }));
 app.use(routes);
