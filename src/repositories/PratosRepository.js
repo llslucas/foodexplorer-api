@@ -19,7 +19,9 @@ export default class PratosRepository{
       price      
     }); 
     
-    await this.InsertIngredientes({prato_id, ingredientes});
+    if(ingredientes){
+      await this.InsertIngredientes({prato_id, ingredientes});
+    }
 
     return prato_id;
   };
