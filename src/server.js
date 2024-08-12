@@ -14,7 +14,7 @@ app.use("/files", express.static(UPLOADS_FOLDER));
 app.use(cookieParser());
 app.use(cors({     
     origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://foodexplorer.llslucas.dev", "https://sprightly-platypus-4b640c.netlify.app"],
-    credentials: true
+    credentials: true    
 }));
 app.use(routes);
 
