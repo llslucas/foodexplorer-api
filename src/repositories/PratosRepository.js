@@ -65,6 +65,7 @@ export default class PratosRepository{
    */
   async delete({id}){
     await knex("ingredientes").where({prato_id: id}).delete();
+    await knex("favoritos").where({prato_id: id}).delete();
 
     const deleted_itens = await knex("pratos").where({id}).delete();
 
