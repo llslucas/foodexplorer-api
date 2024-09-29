@@ -22,7 +22,7 @@ export default class UsersController {
         const userRepository = new UserRepository();
 
         const userUpdateService = new UserUpdateService(userRepository);
-        userUpdateService.execute({ user_id, name, email, password, old_password })
+        await userUpdateService.execute({ user_id, name, email, password, old_password })
 
         return response.json("Usuário atualizado com sucesso!");
     }
